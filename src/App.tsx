@@ -1,24 +1,58 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
 
+type PropsType = {
+  body: string
+  id: number
+  title: string
+  userId: number
+}
+
 function App() {
+  const [state, setState] = React.useState<PropsType[]>([]);
+  console.log(state);
+
+  React.useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then((response) => response.json())
+      .then(json => setState(json))
+  }, [])
+
+  const deleteHandler = () => {
+    setState([])
+  }
+  const showPostHandler = () => {
+    fetch('https://jsonplaceholder.typicode.com/posts')
+      .then((response) => response.json())
+      .then(json => setState(json))
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button className="btn" onClick={deleteHandler}>DELETE</button>
+      <button className="btn" onClick={showPostHandler}>SHOW POST</button>
+      
+	  
+	  <table className="table">
+            <thead>
+                <tr>                    
+                    <th>id</th>
+                    <th>userId</th>
+					<th>title</th>
+                </tr>
+            </thead>
+            <tbody>
+                {state.map(el => (
+                    <tr key={el.id}>
+						<td>{el.id}</td>
+                        <td>{el.userId}</td>
+                        <td>{el.title}</td>
+					</tr>
+                ))}
+            </tbody>
+        </table>
+
     </div>
   );
 }
