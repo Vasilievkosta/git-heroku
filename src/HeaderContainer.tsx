@@ -16,6 +16,9 @@ const HeaderContainer = () => {
           <li>
             <NavLink to="/topics">Темы ( <i>swapi.dev</i> )</NavLink>
           </li>
+          <li>
+            <NavLink to="/mockapi">Pizzas ( <i>mockapi</i> )</NavLink>
+          </li>
         </ul>
       </nav>
     </header>

@@ -10,7 +10,7 @@ import './App.css';
 
 function Topics() {
   const [planets, setPlanets] = React.useState<any>({});
-
+  //https://631b6309fae3df4dcffd7df6.mockapi.io/api/items
   React.useEffect(() => {
     fetch('https://swapi.dev/api/planets')
       .then((response) => response.json())
